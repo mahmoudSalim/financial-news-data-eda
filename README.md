@@ -35,6 +35,31 @@ Before running anything, make sure you added environment variables in `.env
 ` file, as shown in `.env-example` file.
 
 
+## Start the Tensorflow server
+
+Make sure you installed [Sensorflow Serving](https://www.tensorflow.org/tfx/guide/serving) depencies first, if not run the following commands:
+
+```
+echo "deb http://storage.googleapis.com/tensorflow-serving-apt stable tensorflow-model-server tensorflow-model-server-universal" | sudo tee /etc/apt/sources.list.d/tensorflow-serving.list && \
+curl https://storage.googleapis.com/tensorflow-serving-apt/tensorflow-serving.release.pub.gpg | sudo apt-key add -
+```
+
+```
+sudo apt update
+```
+```
+sudo apt-get install tensorflow-model-server
+```
+
+### Start the server
+
+```
+nohup tensorflow_model_server --rest_api_port=8501  --model_name=sentiment --model_base_path="/Full/Path/for/thr/Model" >server.log 2>&1
+```
+
+_change the `/Full/Path/for/thr/Model` with the actual model directory._
+
+
 ## Run
 
 Run using docker-compose:
